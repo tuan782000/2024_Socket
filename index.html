@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Socket.io Demo</title>
+    </head>
+    <body>
+        <h1>Socket.IO</h1>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+            // console.log(socket);
+            socket.on("connect", () => {
+                console.log("Connected To (client)");
+
+                // Disconnect from server after 5 seconds
+                setTimeout(() => {
+                    socket.disconnect();
+                }, 5000);
+            });
+
+            // Nhận emit từ server và lắng nghe bằng on
+            // socket.on("message", (message) => {
+            //     console.log(message);
+            // });
+
+            // Phát đi emit
+            socket.emit("message", "Send message from client to server")
+            socket.on("disconnect", () => {
+                console.log("Disconnected From Server");
+            });
+        </script>
+    </body>
+</html>
